@@ -1,6 +1,8 @@
 NAME = webserv
 
-SRCS = server.cpp
+SRCS = main.cpp
+
+HEADERS = inc/webserv.hpp
 
 SDIR = src/
 SRCS_DIR = $(addprefix $(SDIR), $(SRCS))
@@ -16,7 +18,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-%.o: $(SDIR)%.cpp
+%.o: $(SDIR)%.cpp $(HEADERS)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
@@ -24,3 +26,7 @@ clean:
 
 fclean: clean
 	$(RM) webserv
+
+re: fclean all
+
+.PHONY: all clean fclean re

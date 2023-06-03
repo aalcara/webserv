@@ -1,21 +1,9 @@
-// Server side C/C++ program to demonstrate Socket
-// programming
-#include <netinet/in.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <cstring>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <iostream>
-#include <istream>
-#define PORT 8080
+#include "../inc/webserv.hpp"
 
 std::string get_location(char *buffer)
 {
 	std::string str_buffer(buffer);
-	// std::cout << str_buffer << std::endl;
-	int first_space = str_buffer.find(" ");
+	std::size_t first_space = str_buffer.find(" ");
 	if (first_space == std::string::npos)
 	{
 		return (0);
@@ -25,7 +13,7 @@ std::string get_location(char *buffer)
 	return (str_buffer.substr(first_space + 1, second_space - first_space - 1));
 }
 
-int main(void)
+int server_manager(void)
 {
 	int server_fd, new_socket, valread;
 	struct sockaddr_in address;
@@ -90,6 +78,7 @@ int main(void)
 	}
 	valread = read(new_socket, buffer, 1024);
 	std::string location = get_location(buffer);
+	std::cout << valread << std::endl;
 	std::cout << "|" << location << "|" << std::endl;
 	if (strcmp(location.c_str(), "/") == 0)
 	{
@@ -107,4 +96,24 @@ int main(void)
 	// closing the listening socket
 	shutdown(server_fd, SHUT_RDWR);
 	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		std::cout << "Using |" << argv[1] << "| config file" << std::endl;
+		// TODO: parse config file
+	}
+	else if (argc == 1)
+	{
+		std::cout << "Using defaut config" << std::endl;
+		// TODO: use dafault config
+	}
+	else
+	{
+		return (1);
+	}
+	server_manager();
+	return (0);
 }
