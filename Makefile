@@ -1,8 +1,8 @@
 NAME = webserv
 
-SRCS = main.cpp
+SRCS = main.cpp Server.cpp
 
-HEADERS = inc/webserv.hpp
+HEADERS = src/webserv.hpp
 
 SDIR = src/
 SRCS_DIR = $(addprefix $(SDIR), $(SRCS))
