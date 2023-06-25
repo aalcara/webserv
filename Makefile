@@ -1,15 +1,15 @@
 NAME = webserv
 
-SRCS = main.cpp
+SRCS = main.cpp Server.cpp Config.cpp utils.cpp
 
-HEADERS = inc/webserv.hpp
+HEADERS = src/webserv.hpp
 
 SDIR = src/
 SRCS_DIR = $(addprefix $(SDIR), $(SRCS))
 OBJS = $(SRCS:.cpp=.o)
 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
 RM = rm -fr
 
