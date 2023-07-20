@@ -27,7 +27,7 @@ Config::Config(std::string file)
 {
 	std::vector<std::string> lines = get_lines(file);
 	std::cout << lines[0] << std::endl;
-	// TODO:SPLIT in SERVERS
+	// TODO:SPLIT in SERVERS and put in servers_vector
 }
 
 Config::server Config::new_server()
